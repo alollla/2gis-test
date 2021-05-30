@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:root {
+  --text-color: #000;
+  --border-color: #999;
+  --tag-bg: #ddd;
+  --white: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  font-family: "Roboto", serif;
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+#root {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-width: 480px;
+  height: 100%;
+  margin: 0 auto;
+
+  @media screen and (min-width: 768px) {
+    max-width: 720px;
+  }
+
+  @media screen and (min-width: 992px) {
+    max-width: 960px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    max-width: 1140px;
+  }
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.tab {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+
+  li {
+    padding: 1rem;
+    border-left: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-color);
+    background: var(--white);
+    cursor: pointer;
+
+    &:last-child {
+      border-right: 1px solid var(--border-color);
+    }
+
+    &:not(.active) {
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    &.active {
+      font-weight: bold;
+    }
+  }
+}
+
+.book-list {
+  margin: -1px 0 0 0;
+  padding: 0;
+  border-top: 1px solid var(--border-color);
+  list-style: none;
+
+  & > li {
+    border-bottom: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    border-left: 1px solid var(--border-color);
+    padding: 1rem;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__status-link {
+    position: relative;
+    text-decoration: underline;
+    padding-right: 1.5rem;
+    white-space: nowrap;
+    cursor: pointer;
+
+    &::after {
+      content: '→';
+      width: 1rem;
+      position: absolute;
+      right: 0;
+    }
+
+    &_done::after {
+      content: '↲';
+    }
+  }
+}
+
+.tags {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  & > li {
+    margin: 0.25rem;
+    padding: 0.25rem;
+    line-height: 1;
+
+    &:not(.tags__no-bg) {
+      background: var(--tag-bg);
+    }
+
+    &:not(.tags__no-bg_text) {
+      cursor: pointer;
+    }
+
+    & > span {
+      text-decoration: underline;
+    }
+  }
+
+  &_filter {
+    padding: 1rem;
+    margin-top: -1px;
+    border: 1px solid var(--border-color);
+  }
+}
