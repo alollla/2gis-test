@@ -1,7 +1,9 @@
 import React from "react";
 
-class TagFilters extends React.Component {
-  removeTagFilter(tag, clear) {
+import Tag from "./tag";
+
+function TagFilters(props) {
+  function removeTagFilter(tag, clear) {
     const params = new URLSearchParams(document.location.search.substring(1));
 
     if (clear) {
@@ -30,26 +32,21 @@ class TagFilters extends React.Component {
     window.dispatchEvent(new Event("popstate"));
   }
 
-  clearTagFilter() {}
-
-  render() {
-    return (
-      <ul className={"tags tags_filter"}>
-        <li className={"tags__no-bg tags__no-bg_text"}>Filtered by tags:</li>
-        {this.props.current.map((tag) => (
-          <li key={tag} onClick={this.removeTagFilter.bind(this, tag)}>
-            #{tag}
-          </li>
-        ))}
-        <li
-          className={"tags__no-bg"}
-          onClick={this.removeTagFilter.bind(this, "", true)}
-        >
-          (<span>clear</span>)
-        </li>
-      </ul>
-    );
+  function clearTagFilter () {
+    removeTagFilter(null, true);
   }
+
+  return (
+    <ul className={"tags tags_filter"}>
+      <li className={"tags__no-bg tags__no-bg_text"}>Filtered by tags:</li>
+      {props.current.map((tag) => (
+        <Tag key={tag} tag={tag} callBack={removeTagFilter} />
+      ))}
+      <li className={"tags__no-bg"} onClick={clearTagFilter}>
+        (<span>clear</span>)
+      </li>
+    </ul>
+  );
 }
 
 export default TagFilters;
